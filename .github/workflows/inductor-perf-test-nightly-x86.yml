@@ -52,7 +52,7 @@ concurrency:
 
 permissions: read-all
 
-# jobs:
+jobs:
 #   get-label-type:
 #     name: get-label-type
 #     uses: pytorch/pytorch/.github/workflows/_runner-determinator.yml@main
