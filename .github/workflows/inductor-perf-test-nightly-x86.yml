@@ -56,6 +56,7 @@ jobs:
   get-label-type:
     name: get-label-type
     uses: pytorch/pytorch/.github/workflows/_runner-determinator.yml@main
+    if: ${{ (github.event_name != 'schedule' || github.repository == 'pytorch/pytorch' || github.repository == 'charan-ponnada/pytorch-private') && (github.repository_owner == 'pytorch' || github.repository_owner == 'charan-ponnada') }}
     with:
       triggering_actor: ${{ github.triggering_actor }}
       issue_owner: ${{ github.event.pull_request.user.login || github.event.issue.user.login }}
@@ -92,6 +93,7 @@ jobs:
   linux-jammy-cpu-py3_9-gcc11-inductor-build-amd:
     name: linux-jammy-cpu-py3.9-gcc11-inductor-amd
     uses: ./.github/workflows/_linux-build.yml
+    needs: get-label-type
     with:
       runner_prefix: "${{ needs.get-label-type.outputs.label-type }}"
       build-environment: linux-jammy-py3.9-gcc11-build
